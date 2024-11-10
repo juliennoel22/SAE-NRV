@@ -2,11 +2,11 @@
 Options -Indexes
 
 # Deny access to all files and directories except ./public/
-#RewriteEngine On
-#RewriteRule ^$ public/ [L]
-#RewriteRule (.*) public/$1 [L]
-#
-## Serve ./public/index.php without showing it in the URL
-#RewriteCond %{REQUEST_FILENAME} !-f
-#RewriteCond %{REQUEST_FILENAME} !-d
-#RewriteRule ^(.*)$ public/index.php [QSA,L]
+RewriteEngine On
+RewriteRule ^$ public/ [L]
+RewriteRule ^(?!public/)(.*)$ public/$1 [L]
+
+# Serve ./public/index.php without showing it in the URL
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ public/index.php [QSA,L]
