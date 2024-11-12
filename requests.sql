@@ -1,3 +1,9 @@
+DROP DATABASE IF EXISTS `nrv_database`;
+
+CREATE DATABASE IF NOT EXISTS `nrv_database`;
+
+USE `nrv_database`;
+
 CREATE TABLE role
 (
     role_id     INT PRIMARY KEY AUTO_INCREMENT,
@@ -12,7 +18,7 @@ CREATE TABLE utilisateur
     utilisateur_prenom   VARCHAR(255)        NOT NULL,
     utilisateur_email    VARCHAR(255) UNIQUE NOT NULL,
     utilisateur_password VARCHAR(255)        NOT NULL,
-    utilisateur_role_id  INT
+    role_id  INT DEFAULT 1
 #     FOREIGN KEY (utilisateur_role_id) REFERENCES role (role_id)
 );
 
@@ -101,7 +107,7 @@ CREATE TABLE preference
 
 
 ALTER TABLE utilisateur
-    ADD FOREIGN KEY (utilisateur_role_id) REFERENCES role (role_id);
+    ADD FOREIGN KEY (role_id) REFERENCES role (role_id);
 ALTER TABLE soiree
     ADD FOREIGN KEY (soiree_lieu_id) REFERENCES lieu (lieu_id);
 ALTER TABLE spectacle
@@ -120,3 +126,7 @@ ALTER TABLE preference
     ADD FOREIGN KEY (preference_utilisateur_id) REFERENCES utilisateur (utilisateur_id);
 ALTER TABLE preference
     ADD FOREIGN KEY (preference_spectacle_id) REFERENCES spectacle (spectacle_id);
+
+
+INSERT INTO role (role_nom, role_niveau) VALUES ('Utilisateur', 100);
+INSERT INTO role (role_nom, role_niveau) VALUES ('Administrateur', 100);

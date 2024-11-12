@@ -23,3 +23,13 @@
         <p>Vivez les sons envoûtants du blues rock avec des artistes de renommée mondiale.</p>
     </article>
 </section>
+<section>
+    <?php
+    if ($_ENV['DEBUG_MODE'] === 'true') {
+        echo '<h2>Debug</h2>';
+        echo '<pre>';
+        var_dump($_SESSION);
+        echo '</pre>';
+    }
+    ?>
+</section>

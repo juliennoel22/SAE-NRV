@@ -1,14 +1,21 @@
 <?php
+session_set_cookie_params(3600);
+session_start();
+define('ROOT_PATH', dirname(__DIR__ . '../'));
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once ROOT_PATH . '/vendor/autoload.php';
 
 use Dotenv\Dotenv;
 use iutnc\NRV\core\Dispatcher;
 
-define('ROOT_PATH', dirname(__DIR__ . '../'));
-
 $dotenv = Dotenv::createImmutable(ROOT_PATH);
 $dotenv->load();
+
+if ($_ENV['DEBUG_MODE'] === 'true') {
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+}
 
 
 try {

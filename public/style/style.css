@@ -5,25 +5,127 @@
 }
 
 body {
-    font-family: sans-serif;
+    font-family: 'Roboto', sans-serif;
     background-color: #f6f6f6;
-    min-height: 100vh;
     font-size: 16px;
+    min-height: 100vh;
 }
 
-header {
-    min-height: 3em;
-    background-color: #e8e8e8;
+/*disable all style on input, buttons, etc*/
+input {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    background: white;
+    border: unset;
+    box-shadow: unset;
+    outline: unset;
+}
+
+button {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    background: #70df70;
+    border-radius: 1em;
+    border: unset;
+    outline: unset;
+    padding: 1em 2em;
+    cursor: pointer;
+}
+
+button:hover {
+    box-shadow: inset 0 5px 1em rgba(255, 255, 255, 0.3), 0 5px 1em rgba(0, 0, 0, 0.1);
+}
+
+button:active {
+    box-shadow: inset 0 5px 1em rgba(0, 0, 0, 0.1);
+}
+
+textarea {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    background: white;
+    border: unset;
+    box-shadow: unset;
+    outline: unset;
+}
+
+audio {
+    border-radius: 1.5em;
+    overflow: hidden;
+    background-color: #000000;
+    accent-color: #70df70;
+}
+
+/* error style */
+/* Style de base pour la div.error */
+div.error {
+    position: fixed;
+    top: -5em; /* Commence hors de l'écran */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f8d7da;
+    color: #721c24;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    padding: 1em;
+    border: 1px solid #f5c6cb;
+    border-radius: 1em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    opacity: 0;
+    transition: top 0.5s ease-in-out, opacity 0.5s linear;
+    cursor: pointer;
+}
+
+div.error .close {
+    margin-left: 0.5em;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+/* Animation pour faire descendre la div.error */
+div.error.show {
+    top: 1em; /* Position finale */
+    opacity: 1;
+    transition: top 0.5s ease-in-out, opacity 0.5s linear;
+}
+
+/* Animation pour faire disparaître la div.error */
+div.error.hide {
+    top: -5em;
+    opacity: 0;
+    transition: top 0.5s ease-in-out, opacity 0.5s linear;
+}
+
+/* navbar style */
+
+header {
+    width: 100%;
+    padding: 1em 5em;
+    min-height: 5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em;
+    background-color: #e8e8e8;
+    box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
+/*}*/
+
+/*header {*/
+/*    min-height: 3em;*/
+/*    background-color: #e8e8e8;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
 }
 
 main {
     min-height: 100vh;
-    width: 80vw;
+    max-width: 80vw;
     margin: 0 auto;
-    padding: 2em 0;
+    /*padding: 2em 0;*/
 }
 
 
@@ -33,4 +135,58 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* main style */
+/*main {*/
+/*    padding: 2em 0;*/
+/*    max-width: 80vw;*/
+/*    margin: 0 auto;*/
+/*    min-height: 100%;*/
+/*}*/
+
+.form-action,
+.form-index{
+    display: flex;
+    gap: 1em;
+    padding: 2em;
+    width: 100%;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.form-index {
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.form-action .input-parent {
+    /*width: 40%;*/
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #e8e8e8;
+    overflow: hidden;
+    border-radius: 1em;
+}
+
+.form-action .input-parent > label {
+    min-width: max-content;
+    width: 30%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 1em;
+}
+.form-action .input-parent > input {
+    width: 100%;
+    padding: 0 1em;
+}
+
+.form-action > .inputs {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1em;
 }
