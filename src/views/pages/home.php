@@ -1,4 +1,9 @@
 <section>
+    <a href="?action=register">Créer un compte</a>
+    <a href="?action=login">Se connecter</a>
+    <a href="?action=logout">Se déconnecter</a>
+</section>
+<section>
     <h2>À propos du festival</h2>
     <p>Le festival Nancy Rock Vibration (NRV) est un événement de deux semaines mettant en vedette une variété de styles de musique rock, y compris le rock classique, le blues rock, le métal et la chanson. Chaque soir, plusieurs lieux accueillent différentes performances, offrant une expérience unique aux amateurs de musique.</p>
 </section>

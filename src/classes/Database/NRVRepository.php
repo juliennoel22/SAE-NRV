@@ -57,10 +57,10 @@ class NRVRepository
 
     public function loginUser(string $utilisateur_email, string $utilisateur_password): bool
     {
-        $query = "SELECT * FROM utilisateur WHERE utilisateur_email = :utilisateur_email AND utilisateur_password = :utilisateur_password";
+        $query = "SELECT utilisateur_password FROM utilisateur WHERE utilisateur_email = :utilisateur_email";
         $stmt = self::$database->prepare($query);
         $stmt->bindParam(':utilisateur_email', $utilisateur_email);
-        $stmt->bindParam(':utilisateur_password', $utilisateur_password);
+//        $stmt->bindParam(':utilisateur_password', $utilisateur_password);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
