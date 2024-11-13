@@ -190,3 +190,145 @@ footer {
     width: 100%;
     gap: 1em;
 }
+
+/*AJout de Julien*/
+
+
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    font-size: 1.8em;
+    color: #333;
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Navigation Links Section */
+section a {
+    color: #007bff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+section a:hover {
+    color: #0056b3;
+}
+
+/* About Festival Section */
+#about-festival {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#about-festival p {
+    text-align: justify;
+    font-size: 1em;
+    line-height: 1.6;
+}
+
+/* Program Section */
+#program {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#program ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+.program-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    padding: 10px;
+    transition: color 0.3s;
+}
+
+.program-link:hover {
+    color: #0056b3;
+}
+
+/* Featured Performances Section */
+#featured-performances {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.spectacle-card {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+.spectacle-info {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+}
+
+.spectacle-info h3 {
+    margin: 10px 0;
+    color: #555;
+    font-size: 1.4em;
+}
+
+.spectacle-info p {
+    margin: 5px 0;
+    color: #777;
+    font-size: 1em;
+}
+
+.spectacle-image {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.no-spectacle {
+    color: #666;
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Debug Section */
+#debug-section {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    color: #777;
+    font-size: 0.9em;
+}
+
