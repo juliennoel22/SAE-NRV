@@ -49,7 +49,7 @@ CREATE TABLE spectacle
     spectacle_titre         VARCHAR(255) NOT NULL,
     spectacle_description   TEXT,
     spectacle_style_musique VARCHAR(255),
-    spectacle_duree         DATE,
+    spectacle_duree         TIME,
     spectacle_horaire       DATE,
     spectacle_soiree_id     INT          NOT NULL
 );
