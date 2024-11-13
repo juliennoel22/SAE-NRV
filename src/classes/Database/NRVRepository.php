@@ -87,4 +87,31 @@ class NRVRepository
         }
         return $user;
     }
+
+    //fonction getAllSpectacles
+//    public function getAllSpectacles(): array
+//    {
+//        $query = "SELECT * FROM spectacle";
+//        $stmt = self::$database->prepare($query);
+//        $stmt->execute();
+//        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+//    }
+    public function getAllSpectacles() {
+        $query = "SELECT spectacle.spectacle_titre AS spectacle_titre, soiree.soiree_date AS spectacle_date, spectacle.spectacle_horaire AS spectacle_horaire, image.image_url AS image_spectacle_url
+                FROM spectacle
+                JOIN soiree ON spectacle.spectacle_soiree_id = soiree.soiree_id
+                LEFT JOIN image ON spectacle.spectacle_id = image.image_spectacle_id;";
+        $stmt = self::$database->prepare($query);
+        $stmt->execute();
+
+        $spectacles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Debugging statement
+        error_log(print_r($spectacles, true));
+
+        return $spectacles;
+
+//        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }

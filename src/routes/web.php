@@ -7,6 +7,8 @@ use iutnc\NRV\classes\Actions\LoginAction;
 use iutnc\NRV\classes\Actions\LogoutAction;
 use iutnc\NRV\classes\Actions\RegisterAction;
 
+use iutnc\NRV\classes\Actions\ListSpectaclesAction;
+
 // Autres actions à inclure selon les besoins...
 
 return [
@@ -15,4 +17,5 @@ return [
     'register' => RegisterAction::class,
     'logout' => LogoutAction::class,
     // Ajouter d'autres routes ici
+    'spectacles' => ListSpectaclesAction::class,
 ];
