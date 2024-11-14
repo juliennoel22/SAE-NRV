@@ -37,12 +37,12 @@ CREATE TABLE soiree
     soiree_nom           VARCHAR(255) NOT NULL,
     soiree_thematique    VARCHAR(255)   DEFAULT NULL,
     soiree_date          DATE         NOT NULL,
-    soiree_horaire_debut DATE         NOT NULL,
+    soiree_horaire_debut TIME         NOT NULL,
     soiree_lieu_id       INT          NOT NULL,
     soiree_tarif         DECIMAL(10, 2) DEFAULT 0
 );
 
-
+DROP TABLE IF EXISTS spectacle ;
 CREATE TABLE spectacle
 (
     spectacle_id            INT PRIMARY KEY AUTO_INCREMENT,
@@ -50,7 +50,7 @@ CREATE TABLE spectacle
     spectacle_description   TEXT,
     spectacle_style_musique VARCHAR(255),
     spectacle_duree         TIME,
-    spectacle_horaire       DATE,
+    spectacle_horaire       TIME,
     spectacle_soiree_id     INT          NOT NULL
 );
 

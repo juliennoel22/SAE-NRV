@@ -15,9 +15,9 @@ VALUES
 -- Insert test data into `spectacle` table
 INSERT INTO spectacle (spectacle_titre, spectacle_description, spectacle_style_musique, spectacle_duree, spectacle_horaire, spectacle_soiree_id)
 VALUES
-('Spectacle A', 'Description A', 'Rock', '01:30:00', '2023-12-01', 1),
-('Spectacle B', 'Description B', 'Jazz', '02:00:00', '2023-12-02', 2),
-('Spectacle C', 'Description C', 'Pop', '01:45:00', '2023-12-03', 3);
+('Spectacle A', 'Description A', 'Rock', '01:30:00', '18:00:00', 1),
+('Spectacle B', 'Description B', 'Jazz', '02:00:00', '19:00:00', 2),
+('Spectacle C', 'Description C', 'Pop', '01:45:00', '17:30:00', 3);
 
 -- Insert test data into `image` table
 INSERT INTO image (image_url, image_spectacle_id, image_soiree_id)
