@@ -8,11 +8,7 @@ class ListSpectaclesAction extends Action{
     {
         $repository = NRVRepository::getInstance();
         $spectacles = $repository->getAllSpectacles();
-//        require __DIR__ . '/../views/spectacles.php';
         return $this->renderPage($spectacles); // array ?
-
-//        // Appel de la vue pour afficher les spectacles
-//        include __DIR__ . '/../views/list_spectacles.php';
     }
 
     // méthode de rendu ?
@@ -21,7 +17,21 @@ class ListSpectaclesAction extends Action{
     private function renderPage(array $spectacles): string
     {
         ob_start();
+
+        include ROOT_PATH . '/src/views/pages/home.php';
+
+        $content = ob_get_clean();
+
+        ob_start();
+
         include ROOT_PATH . '/src/views/pages/spectacles.php';
+
+        $content .= ob_get_clean();
+
+        ob_start();
+
+        include ROOT_PATH . '/src/views/layout.php';
+
         return ob_get_clean();
     }
 
