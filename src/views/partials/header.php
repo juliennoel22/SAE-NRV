@@ -9,4 +9,17 @@
 <body>
 <header>
     <h1>Festival Nancy Rock Vibration</h1>
+    <section>
+    <?php
+
+    use iutnc\NRV\classes\Auth\Authz;
+
+    $user = Authz::getAuthenticatedUser();
+    if ($user !== null): ?>
+        <a href="?action=logout">Se déconnecter</a>
+    <?php else: ?>
+        <a href="?action=register">Créer un compte</a>
+        <a href="?action=login">Se connecter</a>
+    <?php endif; ?>
+    </section>
 </header>

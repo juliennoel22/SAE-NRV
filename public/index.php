@@ -6,6 +6,7 @@ define('ROOT_PATH', dirname(__DIR__ . '../'));
 require_once ROOT_PATH . '/vendor/autoload.php';
 
 use Dotenv\Dotenv;
+use iutnc\NRV\classes\Auth\Authz;
 use iutnc\NRV\core\Dispatcher;
 
 $dotenv = Dotenv::createImmutable(ROOT_PATH);
@@ -17,6 +18,7 @@ $dotenv->load();
     error_reporting(E_ALL);
 //}
 
+//$user = Authz::getAuthenticatedUser();
 
 try {
     // Instancier le dispatcher et exécuter l'action
