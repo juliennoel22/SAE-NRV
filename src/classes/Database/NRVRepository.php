@@ -185,7 +185,15 @@ class NRVRepository
 
     public function getAllLieux(): array
     {
-        $query = "SELECT lieu_id, lieu_nom FROM lieu";
+        $query = "SELECT DISTINCT lieu_id, lieu_nom FROM lieu";
+        $stmt = self::$database->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getAllStyles(): array
+    {
+        $query = "SELECT DISTINCT spectacle_style_musique FROM spectacle";
         $stmt = self::$database->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -232,6 +240,50 @@ class NRVRepository
     {
         $query = "SELECT artiste_id, artiste_nom, artiste_prenom FROM artiste";
         $stmt = self::$database->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function filterSpectacles($date = null, $lieu = null, $style = null): array
+    {
+        $query = "SELECT spectacle.spectacle_titre AS spectacle_titre, 
+                     soiree.soiree_date AS spectacle_date, 
+                     spectacle.spectacle_horaire AS spectacle_horaire, 
+                     image.image_url AS image_spectacle_url 
+              FROM spectacle
+              JOIN soiree ON spectacle.spectacle_soiree_id = soiree.soiree_id
+              LEFT JOIN image ON spectacle.spectacle_id = image.image_spectacle_id";
+
+        $conditions = []; // Tableau pour stocker les conditions de filtrage
+
+        if ($date) {
+            $conditions[] = "soiree.soiree_date = :date";
+        }
+        if ($lieu) {
+            $conditions[] = "soiree.soiree_lieu_id= :lieu";
+        }
+        if ($style) {
+            $conditions[] = "spectacle.spectacle_style_musique = :style";
+        }
+
+        // Si on a des conditions, on les ajoute avec WHERE ou AND
+        if (!empty($conditions)) {
+            $query .= " WHERE " . implode(" AND ", $conditions);
+        }
+
+        $stmt = self::$database->prepare($query);
+
+        // Liaison des paramètres en fonction des filtres disponibles
+        if ($date) {
+            $stmt->bindParam(':date', $date);
+        }
+        if ($lieu) {
+            $stmt->bindParam(':lieu', $lieu);
+        }
+        if ($style) {
+            $stmt->bindParam(':style', $style);
+        }
+
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

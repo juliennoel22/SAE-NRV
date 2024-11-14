@@ -11,9 +11,9 @@
         spectacles préférés.</p>
     <ul>
         <li><a href="?action=spectacles&filter=all" class="program-link">Programme complet</a></li>
-        <li><a href="?action=spectacles&filter=date" class="program-link">Par date</a></li>
-        <li><a href="?action=spectacles&filter=lieu" class="program-link">Par lieu</a></li>
-        <li><a href="?action=spectacles&filter=music" class="program-link">Par style de musique</a></li>
+        <li><a href="?action=filter" class="program-link">Filtrer les spectacles</a></li>
+
+
     </ul>
 </section>
 
@@ -27,4 +27,3 @@
     }
     ?>
 </section>
-
