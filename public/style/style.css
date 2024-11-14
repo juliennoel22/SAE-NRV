@@ -12,7 +12,8 @@ body {
 }
 
 /*disable all style on input, buttons, etc*/
-input {
+input,
+select {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     background: white;
@@ -47,6 +48,10 @@ textarea {
     border: unset;
     box-shadow: unset;
     outline: unset;
+    width: 100%;
+    min-height: 5em;
+    resize: vertical;
+    padding: 1em;
 }
 
 audio {
@@ -179,7 +184,8 @@ footer {
     align-items: center;
     padding: 1em;
 }
-.form-action .input-parent > input {
+.form-action .input-parent > input,
+.form-action .input-parent > select {
     width: 100%;
     padding: 0 1em;
 }

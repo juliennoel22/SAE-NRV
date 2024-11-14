@@ -88,30 +88,152 @@ class NRVRepository
         return $user;
     }
 
-    //fonction getAllSpectacles
-//    public function getAllSpectacles(): array
-//    {
-//        $query = "SELECT * FROM spectacle";
-//        $stmt = self::$database->prepare($query);
-//        $stmt->execute();
-//        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-//    }
-    public function getAllSpectacles() {
+    public function getAllSpectacles(): bool|array
+    {
         $query = "SELECT spectacle.spectacle_titre AS spectacle_titre, soiree.soiree_date AS spectacle_date, spectacle.spectacle_horaire AS spectacle_horaire, image.image_url AS image_spectacle_url
                 FROM spectacle
                 JOIN soiree ON spectacle.spectacle_soiree_id = soiree.soiree_id
                 LEFT JOIN image ON spectacle.spectacle_id = image.image_spectacle_id;";
         $stmt = self::$database->prepare($query);
         $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
-        $spectacles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    public function getSoireeById(int $soiree_id): array
+    {
+        $query = "
+            SELECT
+                soiree.*,
+                image.image_url AS image_url,
+                video.video_url AS video_url
+            FROM
+                soiree
+            LEFT JOIN
+                image ON soiree.soiree_id = image.image_soiree_id
+            LEFT JOIN
+                video ON soiree.soiree_id = video.video_soiree_id
+            WHERE
+                soiree.soiree_id = :soiree_id
+            ";
+        $stmt = self::$database->prepare($query);
+        $stmt->bindParam(':soiree_id', $soiree_id);
+        $stmt->execute();
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        // Debugging statement
-        error_log(print_r($spectacles, true));
+        $soiree = [];
+        if (!empty($results)) {
+            $soiree = $results[0];
+            $soiree['images'] = [];
+            $soiree['videos'] = [];
 
-        return $spectacles;
+            foreach ($results as $row) {
+                if (!empty($row['image_url'])) {
+                    $soiree['images'][] = $row['image_url'];
+                }
+                if (!empty($row['video_url'])) {
+                    $soiree['videos'][] = $row['video_url'];
+                }
+            }
+        }
 
-//        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $soiree;
+    }
+
+    public function addImageToSoiree(int $soiree_id, string $image_url): void
+    {
+        $query = "INSERT INTO image (image_url, image_soiree_id) VALUES (:image_url, :soiree_id)";
+        $stmt = self::$database->prepare($query);
+        $stmt->bindParam(':image_url', $image_url);
+        $stmt->bindParam(':soiree_id', $soiree_id);
+        $stmt->execute();
+    }
+
+    public function addVideoToSoiree(int $soiree_id, string $video_url): void
+    {
+        $query = "INSERT INTO video (video_url, video_soiree_id) VALUES (:video_url, :soiree_id)";
+        $stmt = self::$database->prepare($query);
+        $stmt->bindParam(':video_url', $video_url);
+        $stmt->bindParam(':soiree_id', $soiree_id);
+        $stmt->execute();
+    }
+
+    public function addSoiree(string $nom, ?string $thematique, string $date, string $horaire_debut, int $lieu_id, float $tarif): void
+    {
+        $query = "INSERT INTO soiree (soiree_nom, soiree_thematique, soiree_date, soiree_horaire_debut, soiree_lieu_id, soiree_tarif) VALUES (:nom, :thematique, :date, :horaire_debut, :lieu_id, :tarif)";
+        $stmt = self::$database->prepare($query);
+        $stmt->bindParam(':nom', $nom);
+        $stmt->bindParam(':thematique', $thematique);
+        $stmt->bindParam(':date', $date);
+        $stmt->bindParam(':horaire_debut', $horaire_debut);
+        $stmt->bindParam(':lieu_id', $lieu_id);
+        $stmt->bindParam(':tarif', $tarif);
+        $stmt->execute();
+    }
+
+    public function addSpectacle(string $titre, ?string $description, ?string $style_musique, ?string $duree, string $horaire, int $soiree_id): void
+    {
+        $query = "INSERT INTO spectacle (spectacle_titre, spectacle_description, spectacle_style_musique, spectacle_duree, spectacle_horaire, spectacle_soiree_id) VALUES (:titre, :description, :style_musique, :duree, :horaire, :soiree_id)";
+        $stmt = self::$database->prepare($query);
+        $stmt->bindParam(':titre', $titre);
+        $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':style_musique', $style_musique);
+        $stmt->bindParam(':duree', $duree);
+        $stmt->bindParam(':horaire', $horaire);
+        $stmt->bindParam(':soiree_id', $soiree_id);
+        $stmt->execute();
+    }
+
+    public function getAllLieux(): array
+    {
+        $query = "SELECT lieu_id, lieu_nom FROM lieu";
+        $stmt = self::$database->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getAllSoirees(): array
+    {
+        $query = "SELECT soiree_id, soiree_nom FROM soiree";
+        $stmt = self::$database->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function addLieu(string $nom, string $adresse, int $nb_places_assises, int $nb_places_debout): void
+    {
+        $query = "INSERT INTO lieu (lieu_nom, lieu_adresse, lieu_nb_places_assises, lieu_nb_places_debout) VALUES (:nom, :adresse, :nb_places_assises, :nb_places_debout)";
+        $stmt = self::$database->prepare($query);
+        $stmt->bindParam(':nom', $nom);
+        $stmt->bindParam(':adresse', $adresse);
+        $stmt->bindParam(':nb_places_assises', $nb_places_assises);
+        $stmt->bindParam(':nb_places_debout', $nb_places_debout);
+        $stmt->execute();
+    }
+
+    public function addArtiste(string $nom, string $prenom): void
+    {
+        $query = "INSERT INTO artiste (artiste_nom, artiste_prenom) VALUES (:nom, :prenom)";
+        $stmt = self::$database->prepare($query);
+        $stmt->bindParam(':nom', $nom);
+        $stmt->bindParam(':prenom', $prenom);
+        $stmt->execute();
+    }
+
+    public function addArtisteToSpectacle(int $artiste_id, int $spectacle_id): void
+    {
+        $query = "INSERT INTO artiste_to_spectacle (artiste_to_spectacle_artiste_id, artiste_to_spectacle_spectacle_id) VALUES (:artiste_id, :spectacle_id)";
+        $stmt = self::$database->prepare($query);
+        $stmt->bindParam(':artiste_id', $artiste_id);
+        $stmt->bindParam(':spectacle_id', $spectacle_id);
+        $stmt->execute();
+    }
+
+    public function getAllArtistes(): array
+    {
+        $query = "SELECT artiste_id, artiste_nom, artiste_prenom FROM artiste";
+        $stmt = self::$database->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 }
