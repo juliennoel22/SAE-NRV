@@ -15,7 +15,12 @@
     use iutnc\NRV\classes\Auth\Authz;
 
     $user = Authz::getAuthenticatedUser();
-    if ($user !== null): ?>
+
+    if ($user !== null && $user->hasAccess(10)): ?>
+        <a href="?action=staff">Panel Staff</a>
+    <?php endif; ?>
+
+    <?php if ($user !== null): ?>
         <a href="?action=logout">Se déconnecter</a>
     <?php else: ?>
         <a href="?action=register">Créer un compte</a>
@@ -23,3 +28,10 @@
     <?php endif; ?>
     </section>
 </header>
+
+<?php if (!empty($errorMessage)): ?>
+<div class="error">
+    <span><?= htmlspecialchars($errorMessage) ?></span>
+    <span class="close">&times;</span>
+</div>
+<?php endif; ?>

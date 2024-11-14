@@ -18,7 +18,7 @@ CREATE TABLE utilisateur
     utilisateur_prenom   VARCHAR(255)        NOT NULL,
     utilisateur_email    VARCHAR(255) UNIQUE NOT NULL,
     utilisateur_password VARCHAR(255)        NOT NULL,
-    role_id  INT DEFAULT 1
+    role_id              INT DEFAULT 1
 );
 
 
@@ -59,17 +59,17 @@ CREATE TABLE image
 (
     image_id           INT PRIMARY KEY AUTO_INCREMENT,
     image_url          VARCHAR(255) NOT NULL,
-    image_spectacle_id INT,
-    image_lieu_id      INT
+    image_spectacle_id INT DEFAULT NULL,
+    image_soiree_id    INT DEFAULT NULL
 );
-
 
 
 CREATE TABLE video
 (
     video_id           INT PRIMARY KEY AUTO_INCREMENT,
     video_url          VARCHAR(255) NOT NULL,
-    video_spectacle_id INT
+    video_spectacle_id INT DEFAULT NULL,
+    video_soiree_id    INT DEFAULT NULL
 );
 
 
@@ -87,15 +87,6 @@ CREATE TABLE artiste_to_spectacle
     PRIMARY KEY (artiste_to_spectacle_artiste_id, artiste_to_spectacle_spectacle_id)
 );
 
-CREATE TABLE preference
-(
-    preference_utilisateur_id INT NOT NULL,
-    preference_spectacle_id   INT NOT NULL,
-    PRIMARY KEY (preference_utilisateur_id, preference_spectacle_id)
-);
-
-
-
 ALTER TABLE utilisateur
     ADD FOREIGN KEY (role_id) REFERENCES role (role_id);
 ALTER TABLE soiree
@@ -104,20 +95,17 @@ ALTER TABLE spectacle
     ADD FOREIGN KEY (spectacle_soiree_id) REFERENCES soiree (soiree_id);
 ALTER TABLE image
     ADD FOREIGN KEY (image_spectacle_id) REFERENCES spectacle (spectacle_id);
-ALTER TABLE image
-    ADD FOREIGN KEY (image_lieu_id) REFERENCES lieu (lieu_id);
 ALTER TABLE video
     ADD FOREIGN KEY (video_spectacle_id) REFERENCES spectacle (spectacle_id);
 ALTER TABLE artiste_to_spectacle
     ADD FOREIGN KEY (artiste_to_spectacle_artiste_id) REFERENCES artiste (artiste_id);
 ALTER TABLE artiste_to_spectacle
     ADD FOREIGN KEY (artiste_to_spectacle_spectacle_id) REFERENCES spectacle (spectacle_id);
-ALTER TABLE preference
-    ADD FOREIGN KEY (preference_utilisateur_id) REFERENCES utilisateur (utilisateur_id);
-ALTER TABLE preference
-    ADD FOREIGN KEY (preference_spectacle_id) REFERENCES spectacle (spectacle_id);
 
 
-INSERT INTO role (role_nom, role_niveau) VALUES ('Utilisateur', 0);
-INSERT INTO role (role_nom, role_niveau) VALUES ('Staff', 10);
-INSERT INTO role (role_nom, role_niveau) VALUES ('Administrateur', 100);
+INSERT INTO role (role_nom, role_niveau)
+VALUES ('Utilisateur', 0);
+INSERT INTO role (role_nom, role_niveau)
+VALUES ('Staff', 10);
+INSERT INTO role (role_nom, role_niveau)
+VALUES ('Administrateur', 100);
