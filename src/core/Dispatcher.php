@@ -33,7 +33,8 @@ class Dispatcher
         // Instancier et exécuter l'action
         $action = new $actionClass();
         try {
-            echo $action->execute();
+            $content = $action->execute();
+            echo $content;
         } catch (\Exception $e) {
             // En cas d'erreur, afficher un message d'erreur
             echo '<div class="error">Error: ' . $e->getMessage() . '</div>';

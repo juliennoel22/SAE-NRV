@@ -6,6 +6,7 @@ use iutnc\NRV\classes\Actions\DefaultAction;
 use iutnc\NRV\classes\Actions\LoginAction;
 use iutnc\NRV\classes\Actions\LogoutAction;
 use iutnc\NRV\classes\Actions\RegisterAction;
+use iutnc\NRV\classes\Actions\StaffAction;
 
 use iutnc\NRV\classes\Actions\ListSpectaclesAction;
 
@@ -16,6 +17,9 @@ return [
     'login' => LoginAction::class,
     'register' => RegisterAction::class,
     'logout' => LogoutAction::class,
-    // Ajouter d'autres routes ici
     'spectacles' => ListSpectaclesAction::class,
+    'staff' => StaffAction::class,
+
+
+    // Ajouter d'autres routes ici
 ];

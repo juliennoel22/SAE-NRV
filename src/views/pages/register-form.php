@@ -1,10 +1,4 @@
 <a href="?action=default">Retour à l'accueil</a>
-<?php if (!empty($errorMessage)): ?>
-    <div class="error">
-        <span><?= htmlspecialchars($errorMessage) ?></span>
-        <span class="close">&times;</span>
-    </div>
-<?php endif; ?>
 <form method="post" action="?action=register" class="form form-action">
     <div class="inputs">
         <div class="input-parent">

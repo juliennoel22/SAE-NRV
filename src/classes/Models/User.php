@@ -74,4 +74,9 @@ class User
         $this->utilisateur_role = $utilisateur_role;
     }
 
+    public function hasAccess(int $requiredLevel): bool
+    {
+        return $this->utilisateur_role->getRoleLevel() >= $requiredLevel;
+    }
+
 }
