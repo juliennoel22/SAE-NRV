@@ -11,4 +11,4 @@
         </div>
     </div>
     <button type="submit">Se connecter</button>
-</form><?php
+</form>

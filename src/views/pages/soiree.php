@@ -1,6 +1,3 @@
-<pre>
-    <?php print_r($soiree); ?>
-</pre>
 <section id="soiree-details">
     <?php if (isset($soiree) && is_array($soiree) && !empty($soiree)): ?>
         <h1><?= htmlspecialchars($soiree['soiree_nom']) ?></h1>
@@ -38,8 +35,6 @@
             <?php endif; ?>
         </div>
 
-
-
 <!--        Pas nécessaire d'afficher les images et les vidéos de la soirée à la fin-->
         <?php if (!empty($soiree['images'])): ?>
             <div class="soiree-images">
@@ -71,10 +66,3 @@
 </section>
 
 <?php include ROOT_PATH . '/src/views/partials/program-list.php'; ?>
-
-<section id="debug-section">
-    <?php if ($_ENV['DEBUG_MODE'] === 'true'): ?>
-        <h2>Debug</h2>
-        <pre><?php var_dump($_SESSION); ?></pre>
-    <?php endif; ?>
-</section>

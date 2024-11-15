@@ -7,13 +7,11 @@
 
 <?php include ROOT_PATH . '/src/views/partials/program-list.php'; ?>
 
-<section id="debug-section">
-    <?php
-    if ($_ENV['DEBUG_MODE'] === 'true') {
-        echo '<h2>Debug</h2>';
-        echo '<pre>';
-        var_dump($_SESSION);
-        echo '</pre>';
-    }
-    ?>
-</section>
+<?php if ($_ENV['DEBUG_MODE'] === 'true') { ?>
+    <section id="debug-section">
+        <h2>Debug</h2>
+        <pre>
+        <?php var_dump($_SESSION); ?>
+        </pre>
+    </section>
+<?php } ?>

@@ -1,7 +1,3 @@
-<pre>
-
-    <?php print_r($spectacles); ?>
-</pre>
 <section id="featured-performances">
     <a href="?action=default">Retour à l'accueil</a>
     <h2>Liste des Spectacles</h2>

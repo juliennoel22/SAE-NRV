@@ -42,7 +42,6 @@ CREATE TABLE soiree
     soiree_tarif         DECIMAL(10, 2) DEFAULT 0
 );
 
-DROP TABLE IF EXISTS spectacle ;
 CREATE TABLE spectacle
 (
     spectacle_id            INT PRIMARY KEY AUTO_INCREMENT,
