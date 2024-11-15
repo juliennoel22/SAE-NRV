@@ -5,9 +5,9 @@
 
 > ### 🙎Contributeurs
 > - [NOEL Julien](https://github.com/juliennoel22)
-> - [Nathan OUDER](https://github.com/vraiSlophil)
+> - [OUDER Nathan](https://github.com/vraiSlophil)
 > - [DEFOLIE Julien](https://github.com/Kwilium54)
-> - [FRANOUX Noé]()
+> - [FRANOUX Noé](https://github.com/SAKIROO)
 
 # Sujet de Développement Web
 
