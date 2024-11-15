@@ -295,12 +295,10 @@ class NRVRepository
 
     public function filterSpectacles($date = null, $lieu = null, $style = null): array
     {
-        $query = "SELECT spectacle.spectacle_titre AS spectacle_titre, 
+        $query = "SELECT spectacle.*, 
                      soiree.soiree_date AS spectacle_date, 
-                     spectacle.spectacle_horaire AS spectacle_horaire, 
-                     image.image_url AS image_spectacle_url, 
-                     spectacle_id,
-                     soiree.soiree_id AS soiree_id
+                     soiree.*,
+                     image.image_url AS image_spectacle_url
               FROM spectacle
               JOIN soiree ON spectacle.spectacle_soiree_id = soiree.soiree_id
               LEFT JOIN image ON spectacle.spectacle_id = image.image_spectacle_id";

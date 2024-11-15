@@ -8,11 +8,6 @@ use iutnc\NRV\classes\Database\NRVRepository;
 class SoireeAction extends Action
 {
 
-//    if ($_GET['action'] === 'showDetails' && isset($_GET['id'])) {
-//    $action->showsoireeDetails((int)$_GET['id']);
-//    }
-
-//get id from soiree.php
     /**
      * @throws Exception
      */
@@ -24,7 +19,7 @@ class SoireeAction extends Action
             try {
                 $soiree_id = intval($soiree_id);
                 if ($soiree_id === 0) {
-                    throw new Exception("L'id du soiree n'est pas prise en charge.");
+                    throw new Exception("L'id de la soiree n'est pas prise en charge.");
                 }
             } catch (Exception $e) {
                 throw new Exception($e->getMessage());
@@ -33,7 +28,7 @@ class SoireeAction extends Action
             $repository = NRVRepository::getInstance();
             $soiree = $repository->getsoireeById($soiree_id);
 
-            if (is_array($soiree)) {
+            if ($soiree) {
                 return $this->renderPage($soiree);
             } else {
                 throw new Exception("Le soiree n'existe pas.");
