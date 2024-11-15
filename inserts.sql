@@ -46,3 +46,7 @@ VALUES
 (1, 1),
 (2, 2),
 (3, 3);
+
+-- Insertion des videos des spectacles 1 et 2
+INSERT INTO video (video_id, video_url, video_spectacle_id) VALUES (1, 'video_1.mp4', 1);
+INSERT INTO video (video_id, video_url, video_spectacle_id) VALUES (2, 'video_2.mp4', 2);
