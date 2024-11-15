@@ -12,11 +12,11 @@ use iutnc\NRV\core\Dispatcher;
 $dotenv = Dotenv::createImmutable(ROOT_PATH);
 $dotenv->load();
 
-//if ($_ENV['DEBUG_MODE'] === 'true') {
+if ($_ENV['DEBUG_MODE'] === 'true') {
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
-//}
+}
 
 //$user = Authz::getAuthenticatedUser();
 
