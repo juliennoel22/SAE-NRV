@@ -93,7 +93,7 @@ class NRVRepository
         $query = "SELECT spectacle.spectacle_titre AS spectacle_titre, soiree.soiree_date AS spectacle_date, spectacle.spectacle_horaire AS spectacle_horaire, image.image_url AS image_spectacle_url
                 FROM spectacle
                 JOIN soiree ON spectacle.spectacle_soiree_id = soiree.soiree_id
-                LEFT JOIN image ON spectacle.spectacle_id = image.image_spectacle_id;";
+                LEFT JOIN image ON spectacle.spectacle_id = image.image_spectacle_id";
         $stmt = self::$database->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -287,5 +287,30 @@ class NRVRepository
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getSpectacleById(int $spectacle_id): array|bool
+    {
+        $query = "
+            SELECT sp.spectacle_titre as spectacle_titre,GROUP_CONCAT(DISTINCT CONCAT(a.artiste_prenom, ' ', a.artiste_nom) SEPARATOR ', ') as spectacle_artistes,
+                sp.spectacle_description,
+                sp.spectacle_style_musique,
+                sp.spectacle_duree,
+                GROUP_CONCAT(DISTINCT img.image_url SEPARATOR ', ') as spectacle_image,
+                GROUP_CONCAT(DISTINCT vid.video_url SEPARATOR ', ') AS spectacle_video_url
+            FROM 
+                spectacle sp
+            LEFT JOIN artiste_to_spectacle ats ON sp.spectacle_id = ats.artiste_to_spectacle_spectacle_id
+            LEFT JOIN artiste a ON ats.artiste_to_spectacle_artiste_id = a.artiste_id
+            LEFT JOIN image img ON sp.spectacle_id = img.image_spectacle_id
+            LEFT JOIN video vid ON sp.spectacle_id = vid.video_spectacle_id
+            WHERE spectacle_id = :spectacle_id
+            GROUP BY 
+                sp.spectacle_id
+            ";
+        $stmt = self::$database->prepare($query);
+        $stmt->bindParam(':spectacle_id', $spectacle_id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
 
 }
