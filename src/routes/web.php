@@ -12,6 +12,7 @@ use iutnc\NRV\classes\Actions\ListSpectaclesAction;
 use iutnc\NRV\classes\Actions\AddPreference;
 use iutnc\NRV\classes\Actions\ListPreferences;
 use iutnc\NRV\classes\Actions\SpectacleAction;
+use iutnc\NRV\classes\Actions\SoireeAction;
 
 // Autres actions à inclure selon les besoins...
 
@@ -23,6 +24,7 @@ return [
     // Ajouter d'autres routes ici
     'spectacles' => ListSpectaclesAction::class,
     'spectacle' => SpectacleAction::class,
+    'soiree' => SoireeAction::class,
     'staff' => StaffAction::class,
     'filter' => FilterSpectaclesAction::class,
     'addpref' => AddPreference::class,

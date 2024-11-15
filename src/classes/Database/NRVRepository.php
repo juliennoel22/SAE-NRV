@@ -106,19 +106,35 @@ class NRVRepository
     public function getSoireeById(int $soiree_id): array
     {
         $query = "
-            SELECT
-                soiree.*,
-                image.image_url AS image_url,
-                video.video_url AS video_url
-            FROM
-                soiree
-            LEFT JOIN
-                image ON soiree.soiree_id = image.image_soiree_id
-            LEFT JOIN
-                video ON soiree.soiree_id = video.video_soiree_id
-            WHERE
-                soiree.soiree_id = :soiree_id
-            ";
+        SELECT
+            soiree.*,
+            lieu.lieu_nom AS lieu_nom,
+            lieu.lieu_adresse AS lieu_adresse,
+            image.image_url AS image_url,
+            video.video_url AS video_url,
+            spectacle.spectacle_titre AS spectacle_titre,
+            GROUP_CONCAT(DISTINCT CONCAT(a.artiste_prenom, ' ', a.artiste_nom) SEPARATOR ', ') as spectacle_artistes,
+            spectacle.spectacle_description AS spectacle_description,
+            spectacle.spectacle_style_musique AS spectacle_style_musique,
+            GROUP_CONCAT(DISTINCT vid.video_url SEPARATOR ', ') AS spectacle_video_url
+        FROM
+            soiree
+        LEFT JOIN
+            image ON soiree.soiree_id = image.image_soiree_id
+        LEFT JOIN
+            video ON soiree.soiree_id = video.video_soiree_id
+        JOIN
+            lieu ON soiree.soiree_lieu_id = lieu.lieu_id
+        JOIN
+            spectacle ON soiree.soiree_id = spectacle.spectacle_soiree_id
+        LEFT JOIN video vid ON spectacle.spectacle_id = vid.video_spectacle_id
+        LEFT JOIN artiste_to_spectacle ats ON spectacle.spectacle_id = ats.artiste_to_spectacle_spectacle_id
+        LEFT JOIN artiste a ON ats.artiste_to_spectacle_artiste_id = a.artiste_id
+        WHERE
+            soiree.soiree_id = :soiree_id
+        GROUP BY
+            spectacle.spectacle_id
+    ";
         $stmt = self::$database->prepare($query);
         $stmt->bindParam(':soiree_id', $soiree_id);
         $stmt->execute();
@@ -129,14 +145,16 @@ class NRVRepository
             $soiree = $results[0];
             $soiree['images'] = [];
             $soiree['videos'] = [];
+            $soiree['spectacles'] = [];
 
             foreach ($results as $row) {
-                if (!empty($row['image_url'])) {
+                if (!empty($row['image_url']) && !in_array($row['image_url'], $soiree['images'])) {
                     $soiree['images'][] = $row['image_url'];
                 }
-                if (!empty($row['video_url'])) {
+                if (!empty($row['video_url']) && !in_array($row['video_url'], $soiree['videos'])) {
                     $soiree['videos'][] = $row['video_url'];
                 }
+                $soiree['spectacles'][] = ['spectacle_titre' => $row['spectacle_titre'], 'spectacle_artistes' => $row['spectacle_artistes'], 'spectacle_description' => $row['spectacle_description'], 'spectacle_style_musique' => $row['spectacle_style_musique'], 'spectacle_video_url' => $row['spectacle_video_url']];
             }
         }
 
@@ -291,5 +309,33 @@ class NRVRepository
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getSpectacleById(int $spectacle_id): array|bool
+    {
+        $query = "
+            SELECT 
+                sp.spectacle_titre as spectacle_titre,
+                GROUP_CONCAT(DISTINCT CONCAT(a.artiste_prenom, ' ', a.artiste_nom) SEPARATOR ', ') as spectacle_artistes,
+                sp.spectacle_description,
+                sp.spectacle_style_musique,
+                sp.spectacle_duree,
+                GROUP_CONCAT(DISTINCT img.image_url SEPARATOR ', ') as spectacle_image,
+                GROUP_CONCAT(DISTINCT vid.video_url SEPARATOR ', ') AS spectacle_video_url
+            FROM 
+                spectacle sp
+            LEFT JOIN artiste_to_spectacle ats ON sp.spectacle_id = ats.artiste_to_spectacle_spectacle_id
+            LEFT JOIN artiste a ON ats.artiste_to_spectacle_artiste_id = a.artiste_id
+            LEFT JOIN image img ON sp.spectacle_id = img.image_spectacle_id
+            LEFT JOIN video vid ON sp.spectacle_id = vid.video_spectacle_id
+            WHERE spectacle_id = :spectacle_id
+            GROUP BY 
+                sp.spectacle_id
+            ";
+        $stmt = self::$database->prepare($query);
+        $stmt->bindParam(':spectacle_id', $spectacle_id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
 
 }
