@@ -1,10 +1,38 @@
 # IUT Nancy-Charlemagne BUT Informatique S3
+
+
 ## SAE « Développer une application web sécurisée »
+
+> ### 🙎Contributeurs
+> - [NOEL Julien](https://github.com/juliennoel22)
+> - [Nathan OUDER](https://github.com/vraiSlophil)
+> - [DEFOLIE Julien](https://github.com/Kwilium54)
+> - [FRANOUX Noé]()
 
 # Sujet de Développement Web
 
 ## Objectif
 L'objectif de la SAE est de développer une application web utilisant une base de données, en assurant notamment la sécurité et en produisant une vidéo de démonstration en anglais. Cette SAE permet de mettre en application des connaissances et des techniques issues de la programmation web, des bases de données, de la cryptographie et de l'anglais.
+
+
+## Fonctionnalités
+
+| Fonctionnalité                                              | Statut   | Responsable(s)                                  |
+|-------------------------------------------------------------|----------|-------------------------------------------------|
+| 1. Affichage de la liste des spectacles                      | ✅       | - [NOEL Julien](https://github.com/juliennoel22) |
+| 2. Filtrage de la liste des spectacles par date              | ✅       | - [DEFOLIE Julien](https://github.com/Kwilium54) |
+| 3. Filtrage de la liste des spectacles par style de musique  | ✅       | - [DEFOLIE Julien](https://github.com/Kwilium54) |
+| 4. Filtrage de la liste des spectacles par lieu              | ✅       | - [DEFOLIE Julien](https://github.com/Kwilium54) |
+| 5. Affichage détaillé d’un spectacle                         | ✅       | - [NOEL Julien](https://github.com/juliennoel22) |
+| 6. Affichage du détail d’une soirée                          | ✅       | - [NOEL Julien](https://github.com/juliennoel22) |
+| 7. En cliquant sur un spectacle, afficher le détail de la soirée correspondante | ✅ | - [NOEL Julien](https://github.com/juliennoel22) |
+| 11. Ajouter un spectacle dans sa liste de préférence        | ✅       | - [DEFOLIE Julien](https://github.com/Kwilium54) |
+| 12. Afficher sa liste de préférence                         | ✅       | - [DEFOLIE Julien](https://github.com/Kwilium54) |
+| 13. S’authentifier                                           | ✅       | - [Nathan OUDER](https://github.com/vraiSlophil) |
+| 14. Créer un spectacle                                       | ✅       | - [Nathan OUDER](https://github.com/vraiSlophil) |
+| 15. Créer une soirée                                         | ✅       | - [Nathan OUDER](https://github.com/vraiSlophil) |
+| 16. Ajouter un spectacle à une soirée                        | ✅       | - [Nathan OUDER](https://github.com/vraiSlophil) |
+| 20. Créer un compte staff                                    | ✅       | - [Nathan OUDER](https://github.com/vraiSlophil) |
 
 ## Contexte général :
 le festival NRV, Nancy Rock Vibration
@@ -36,18 +64,7 @@ Le festival propose des soirées composées de deux ou trois spectacles. Chaque 
 - Ajouter un spectacle dans sa liste de préférences
 - Afficher sa liste de préférences
 
-## Sujet : Projet de Développement Web
-### Le rendu attendu
-- Un dépôt git public contenant le code complet du projet, finalisé au plus tard le vendredi 15 novembre à 20h (date du dernier commit-push autorisé),
-- L’application installée et opérationnelle sur le serveur https://webetu.iutnc.univ-lorraine.fr, rendue disponible au plus tard le lundi 18 novembre à 20h.
-- Un document déposé au plus tard le vendredi 15 novembre à 20h dans l’espace Arche prévu à cet effet précisant :
-  - Les noms des membres du groupe,
-  - Un tableau de bord du projet indiquant la liste des fonctionnalités réalisées et les contributions de chaque membre du groupe,
-  - Toutes les données utiles ou nécessaires au test de l’application, notamment les identifiants/mots de passe d’utilisateurs de test.
-  - L’url du dépôt git
-- Ce document doit être complété au plus tard le lundi 18 novembre avec l’URL de test de l’application sur le serveur webetu.
-
-## Critères d’évaluation des projets
+## Critères d’évaluation du projet
 | Critères                | Description                                      | Poids |
 |-------------------------|--------------------------------------------------|-------|
 | Fonctionnalités         | Fonctionnalités implantées, opérationnelles, fiables | 30%   |
