@@ -176,7 +176,8 @@ class NRVRepository
                      soiree.soiree_date AS spectacle_date,
                      spectacle.spectacle_horaire AS spectacle_horaire,
                      image.image_url AS image_spectacle_url,
-                     spectacle.spectacle_id
+                     spectacle.spectacle_id,
+                     soiree.soiree_id AS soiree_id
               FROM spectacle
               JOIN soiree ON spectacle.spectacle_soiree_id = soiree.soiree_id
               LEFT JOIN image ON spectacle.spectacle_id = image.image_spectacle_id
@@ -298,12 +299,13 @@ class NRVRepository
                      soiree.soiree_date AS spectacle_date, 
                      spectacle.spectacle_horaire AS spectacle_horaire, 
                      image.image_url AS image_spectacle_url, 
-                     spectacle_id
+                     spectacle_id,
+                     soiree.soiree_id AS soiree_id
               FROM spectacle
               JOIN soiree ON spectacle.spectacle_soiree_id = soiree.soiree_id
               LEFT JOIN image ON spectacle.spectacle_id = image.image_spectacle_id";
 
-        $conditions = []; // Tableau pour stocker les conditions de filtrage
+        $conditions = [];
 
         if ($date) {
             $conditions[] = "soiree.soiree_date = :date";
@@ -315,14 +317,12 @@ class NRVRepository
             $conditions[] = "spectacle.spectacle_style_musique = :style";
         }
 
-        // Si on a des conditions, on les ajoute avec WHERE ou AND
         if (!empty($conditions)) {
             $query .= " WHERE " . implode(" AND ", $conditions);
         }
 
         $stmt = self::$database->prepare($query);
 
-        // Liaison des paramètres en fonction des filtres disponibles
         if ($date) {
             $stmt->bindParam(':date', $date);
         }
