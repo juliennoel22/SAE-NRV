@@ -161,6 +161,29 @@ class NRVRepository
         return $soiree;
     }
 
+    public function getSpectaclesByIds(array $ids): array
+    {
+        if (empty($ids)) {
+            return [];
+        }
+
+        $placeholders = implode(',', array_fill(0, count($ids), '?'));
+
+        $query = "SELECT spectacle.spectacle_titre AS spectacle_titre,
+                     soiree.soiree_date AS spectacle_date,
+                     spectacle.spectacle_horaire AS spectacle_horaire,
+                     image.image_url AS image_spectacle_url,
+                     spectacle.spectacle_id
+              FROM spectacle
+              JOIN soiree ON spectacle.spectacle_soiree_id = soiree.soiree_id
+              LEFT JOIN image ON spectacle.spectacle_id = image.image_spectacle_id
+              WHERE spectacle.spectacle_id IN ($placeholders)";
+
+        $stmt = self::$database->prepare($query);
+        $stmt->execute($ids);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function addImageToSoiree(int $soiree_id, string $image_url): void
     {
         $query = "INSERT INTO image (image_url, image_soiree_id) VALUES (:image_url, :soiree_id)";
