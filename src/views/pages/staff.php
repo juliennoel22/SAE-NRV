@@ -1,4 +1,4 @@
-<a href="?action=default">Retour à l'accueil</a>
+<a href="?action=default" class="back_home">Retour à l'accueil</a>
 <h2>Créer une soirée, un spectacle, un lieu ou un artiste</h2>
 <div class="form-container">
     <div class="form-section">

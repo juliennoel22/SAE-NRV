@@ -26,6 +26,10 @@
         <a href="?action=register">Créer un compte</a>
         <a href="?action=login">Se connecter</a>
     <?php endif; ?>
+        <div class="switch">
+            <input type="checkbox" id="dark-mode-toggle">
+            <label for="dark-mode-toggle"></label>
+        </div>
     </section>
 </header>
 

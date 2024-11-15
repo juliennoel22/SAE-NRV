@@ -1,66 +1,42 @@
 <section id="soiree-details">
-    <a href="?action=default">Retour à l'accueil</a>
+    <a href="?action=default" class="back-home">Retour à l'accueil</a>
     <?php if (isset($soiree) && is_array($soiree) && !empty($soiree)): ?>
-        <h1><?= htmlspecialchars($soiree['soiree_nom']) ?></h1>
+        <h1 class="soiree-title"><?= htmlspecialchars($soiree['soiree_nom']) ?></h1>
         <div class="soiree-main-info">
-            <p><strong>Thématique :</strong> <?= htmlspecialchars($soiree['soiree_thematique'] ?? 'Non spécifiée') ?></p>
-            <p><strong>Date :</strong> <?= htmlspecialchars($soiree['soiree_date']) ?></p>
-            <p><strong>Horaire :</strong> <?= htmlspecialchars($soiree['soiree_horaire_debut']) ?></p>
-            <p><strong>Tarif :</strong> <?= htmlspecialchars($soiree['soiree_tarif']) ?> €</p>
+            <p class="soiree-thematique"><strong>Thématique :</strong> <?= htmlspecialchars($soiree['soiree_thematique'] ?? 'Non spécifiée') ?></p>
+            <p class="soiree-date"><strong>Date :</strong> <?= htmlspecialchars($soiree['soiree_date']) ?></p>
+            <p class="soiree-horaire"><strong>Horaire :</strong> <?= htmlspecialchars($soiree['soiree_horaire_debut']) ?></p>
+            <p class="soiree-tarif"><strong>Tarif :</strong> <?= htmlspecialchars($soiree['soiree_tarif']) ?> €</p>
         </div>
 
         <div class="soiree-liste-spectacles">
-            <h3>Spectacles</h3>
+            <h3 class="spectacles-title">Spectacles</h3>
             <?php if (!empty($soiree['spectacles'])): ?>
-                <ul>
+                <ul class="spectacles-list">
                     <?php foreach ($soiree['spectacles'] as $spectacle): ?>
-                        <li><strong>Titre:</strong> <?= htmlspecialchars($spectacle['spectacle_titre']) ?></li>
-                        <li><strong>Artistes:</strong> <?= htmlspecialchars($spectacle['spectacle_artistes']) ?></li>
-                        <li><strong>Description:</strong> <?= htmlspecialchars($spectacle['spectacle_description']) ?></li>
-                        <li><strong>Style de musique:</strong> <?= htmlspecialchars($spectacle['spectacle_style_musique']) ?></li>
-                        <li><strong>Vidéo:</strong> <?= htmlspecialchars($spectacle['spectacle_video_url']) ?></li>
-                        <?php if (!empty($spectacle['spectacle_video_url'])): ?>
-                            <?php $video_url = "./videos/spectacles/" . htmlspecialchars($spectacle['spectacle_video_url']); ?>
-                            <div class="spectacle-video">
-                                <h3>Regarder un extrait vidéo</h3>
-                                <video controls width="600">
-                                    <source src="<?= htmlspecialchars($video_url) ?>" type="video/mp4">
-                                    Votre navigateur ne supporte pas l'élément vidéo.
-                                </video>
-                            </div>
-                        <?php endif; ?>
+                        <li class="spectacle-item">
+                            <p class="spectacle-titre"><strong>Titre:</strong> <?= htmlspecialchars($spectacle['spectacle_titre']) ?></p>
+                            <p class="spectacle-artistes"><strong>Artistes:</strong> <?= htmlspecialchars($spectacle['spectacle_artistes']) ?></p>
+                            <p class="spectacle-description"><strong>Description:</strong> <?= htmlspecialchars($spectacle['spectacle_description']) ?></p>
+                            <p class="spectacle-style"><strong>Style de musique:</strong> <?= htmlspecialchars($spectacle['spectacle_style_musique']) ?></p>
+                            <p class="spectacle-video-url"><strong>Vidéo:</strong> <?= htmlspecialchars($spectacle['spectacle_video_url']) ?></p>
+                            <?php if (!empty($spectacle['spectacle_video_url'])): ?>
+                                <?php $video_url = "./videos/spectacles/" . htmlspecialchars($spectacle['spectacle_video_url']); ?>
+                                <div class="spectacle-video">
+                                    <h3 class="video-title">Regarder un extrait vidéo</h3>
+                                    <video controls width="600" class="video-player">
+                                        <source src="<?= htmlspecialchars($video_url) ?>" type="video/mp4">
+                                        Votre navigateur ne supporte pas l'élément vidéo.
+                                    </video>
+                                </div>
+                            <?php endif; ?>
+                        </li>
                     <?php endforeach; ?>
                 </ul>
             <?php else: ?>
-                <p>Aucun spectacle prévu pour cette soirée.</p>
+                <p class="no-spectacle">Aucun spectacle prévu pour cette soirée.</p>
             <?php endif; ?>
         </div>
-
-<!--        Pas nécessaire d'afficher les images et les vidéos de la soirée à la fin-->
-        <?php if (!empty($soiree['images'])): ?>
-            <div class="soiree-images">
-                <h3>Images</h3>
-                <?php foreach ($soiree['images'] as $image_url): ?>
-                    <?php $image_path = "./images/soirees/" . htmlspecialchars($image_url); ?>
-                    <img src="<?= htmlspecialchars($image_path) ?>"
-                         alt="Image de la soirée <?= htmlspecialchars($soiree['soiree_nom']) ?>"
-                         class="soiree-image">
-                <?php endforeach; ?>
-            </div>
-        <?php endif; ?>
-
-        <?php if (!empty($soiree['videos'])): ?>
-            <div class="soiree-videos">
-                <h3>Vidéos</h3>
-                <?php foreach ($soiree['videos'] as $video_url): ?>
-                    <?php $video_path = "./videos/soirees/" . htmlspecialchars($video_url); ?>
-                    <video controls width="600">
-                        <source src="<?= htmlspecialchars($video_path) ?>" type="video/mp4">
-                        Votre navigateur ne supporte pas l'élément vidéo.
-                    </video>
-                <?php endforeach; ?>
-            </div>
-        <?php endif; ?>
     <?php else: ?>
         <p class="no-soiree">Aucune soirée disponible.</p>
     <?php endif; ?>

@@ -1,5 +1,5 @@
 <section id="filter-spectacles">
-    <a href="?action=default">Retour à l'accueil</a>
+    <a href="?action=default" class="back_home">Retour à l'accueil</a>
     <h2>Filtrer les spectacles</h2>
     <form method="post" action="?action=filter" class="form form-action">
         <div class="inputs">

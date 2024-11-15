@@ -16,3 +16,13 @@
     </section>
 <?php } ?>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const toggleSwitch = document.getElementById('dark-mode-toggle');
+        toggleSwitch.addEventListener('change', function() {
+            document.body.classList.toggle('dark-mode', toggleSwitch.checked);
+        });
+    });
+</script>
+
+<?php include ROOT_PATH . '/src/views/partials/fonctionnalites.php'; ?>

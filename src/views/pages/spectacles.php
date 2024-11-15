@@ -1,5 +1,5 @@
 <section id="featured-performances">
-    <a href="?action=default">Retour à l'accueil</a>
+    <a href="?action=default" class="back_home">Retour à l'accueil</a>
     <h2>Liste des Spectacles</h2>
     <?php
     $favoritesIds = isset($_COOKIE['preferences']) ? json_decode($_COOKIE['preferences'], true) : [];
