@@ -38,7 +38,7 @@ class ListPreferences extends Action
     private function render(string $errorMessage = ''): string
     {
         ob_start();
-        include ROOT_PATH . '/src/views/pages/layout.php';
+        include ROOT_PATH . '/src/views/layout.php';
         return ob_get_clean();
     }
 }
