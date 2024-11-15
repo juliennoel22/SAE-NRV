@@ -291,30 +291,5 @@ class NRVRepository
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function getSpectacleById(int $spectacle_id): array|bool
-    {
-        $query = "
-            SELECT sp.spectacle_titre as spectacle_titre,GROUP_CONCAT(DISTINCT CONCAT(a.artiste_prenom, ' ', a.artiste_nom) SEPARATOR ', ') as spectacle_artistes,
-                sp.spectacle_description,
-                sp.spectacle_style_musique,
-                sp.spectacle_duree,
-                GROUP_CONCAT(DISTINCT img.image_url SEPARATOR ', ') as spectacle_image,
-                GROUP_CONCAT(DISTINCT vid.video_url SEPARATOR ', ') AS spectacle_video_url
-            FROM 
-                spectacle sp
-            LEFT JOIN artiste_to_spectacle ats ON sp.spectacle_id = ats.artiste_to_spectacle_spectacle_id
-            LEFT JOIN artiste a ON ats.artiste_to_spectacle_artiste_id = a.artiste_id
-            LEFT JOIN image img ON sp.spectacle_id = img.image_spectacle_id
-            LEFT JOIN video vid ON sp.spectacle_id = vid.video_spectacle_id
-            WHERE spectacle_id = :spectacle_id
-            GROUP BY 
-                sp.spectacle_id
-            ";
-        $stmt = self::$database->prepare($query);
-        $stmt->bindParam(':spectacle_id', $spectacle_id);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-
 
 }

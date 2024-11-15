@@ -5,5 +5,6 @@
     <ul>
         <li><a href="?action=spectacles&filter=all" class="program-link">Programme complet</a></li>
         <li><a href="?action=filter" class="program-link">Filtrer les spectacles</a></li>
+        <li><a href="?action=preferences" class="program-link">Voir mes préférences</a></li>
     </ul>
 </section>

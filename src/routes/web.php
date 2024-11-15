@@ -9,6 +9,8 @@ use iutnc\NRV\classes\Actions\RegisterAction;
 use iutnc\NRV\classes\Actions\StaffAction;
 use iutnc\NRV\classes\Actions\FilterSpectaclesAction;
 use iutnc\NRV\classes\Actions\ListSpectaclesAction;
+use iutnc\NRV\classes\Actions\AddPreference;
+use iutnc\NRV\classes\Actions\ListPreferences;
 use iutnc\NRV\classes\Actions\SpectacleAction;
 
 // Autres actions à inclure selon les besoins...
@@ -23,6 +25,8 @@ return [
     'spectacle' => SpectacleAction::class,
     'staff' => StaffAction::class,
     'filter' => FilterSpectaclesAction::class,
+    'addpref' => AddPreference::class,
+    'preferences' => ListPreferences::class,
 
 
     // Ajouter d'autres routes ici
