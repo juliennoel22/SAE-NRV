@@ -54,7 +54,7 @@ Le festival propose des soirées composées de deux ou trois spectacles. Chaque 
 - Accès aux spectacles prévus sur le même lieu
 - Accès aux spectacles du même style
 
-### C. Alimenter le programme
+### C. Alimenter le programme 
 - S’authentifier en tant que membre du staff du festival
 - Gérer le programme : créer des spectacles et des soirées
 - Gérer le programme : modifier des spectacles et des soirées
