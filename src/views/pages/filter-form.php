@@ -1,13 +1,6 @@
 <section id="filter-spectacles">
     <a href="?action=default">Retour à l'accueil</a>
     <h2>Filtrer les spectacles</h2>
-    <?php if (!empty($errorMessage)): ?>
-        <div class="error">
-            <span><?= htmlspecialchars($errorMessage) ?></span>
-            <span class="close">&times;</span>
-        </div>
-    <?php endif; ?>
-
     <form method="post" action="?action=filter" class="form form-action">
         <div class="inputs">
             <div class="input-parent">
