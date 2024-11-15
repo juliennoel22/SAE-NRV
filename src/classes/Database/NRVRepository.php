@@ -94,10 +94,13 @@ class NRVRepository
                         spectacle.*,
                         soiree.soiree_date AS spectacle_date,
                         spectacle.spectacle_horaire AS spectacle_horaire,
-                        image.image_url AS image_spectacle_url
+                        image.image_url AS image_spectacle_url,
+                        soiree.soiree_id AS soiree_id
                 FROM spectacle
                 JOIN soiree ON spectacle.spectacle_soiree_id = soiree.soiree_id
-                LEFT JOIN image ON spectacle.spectacle_id = image.image_spectacle_id";
+                LEFT JOIN image ON spectacle.spectacle_id = image.image_spectacle_id
+                
+                ";
         $stmt = self::$database->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

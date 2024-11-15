@@ -1,3 +1,7 @@
+<pre>
+
+    <?php print_r($spectacles); ?>
+</pre>
 <section id="featured-performances">
     <a href="?action=default">Retour à l'accueil</a>
     <h2>Liste des Spectacles</h2>
@@ -28,6 +32,13 @@
                     <?php else: ?>
                         <p>Ce spectacle est déjà dans vos préférences.</p>
                     <?php endif; ?>
+
+                    <form action="?action=soiree" method="GET">
+                        <input type="hidden" name="action" value="soiree">
+                        <input type="hidden" name="id" value="<?= htmlspecialchars($spectacle['soiree_id']) ?>">
+                        <button type="submit">Accéder à la soirée</button>
+                    </form>
+
                 </div>
             </article>
         <?php endforeach; ?>
