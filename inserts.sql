@@ -17,7 +17,7 @@ INSERT INTO spectacle (spectacle_titre, spectacle_description, spectacle_style_m
 VALUES
 ('Spectacle A', 'Description A', 'Rock', '01:30:00', '18:00:00', 1),
 ('Spectacle B', 'Description B', 'Jazz', '02:00:00', '19:00:00', 2),
-('Spectacle C', 'Description C', 'Pop', '01:45:00', '17:30:00', 3);
+('Spectacle C', 'Description C', 'Pop', '01:45:00', '17:30:00', 2);
 
 -- Insert test data into `image` table
 INSERT INTO image (image_url, image_spectacle_id, image_soiree_id)
@@ -29,9 +29,9 @@ VALUES
 -- Insert test data into `video` table
 INSERT INTO video (video_url, video_spectacle_id, video_soiree_id)
 VALUES
-('', 1, NULL),
-('', 2, NULL),
-('', NULL, 1);
+('video_1.mp4', 1, 1),
+('video_2.mp4', 2, 2),
+('video_3.mp4', 3, 2);
 
 -- Insert test data into `artiste` table
 INSERT INTO artiste (artiste_nom, artiste_prenom)
@@ -47,6 +47,3 @@ VALUES
 (2, 2),
 (3, 3);
 
--- Insertion des videos des spectacles 1 et 2
-INSERT INTO video (video_id, video_url, video_spectacle_id) VALUES (1, 'video_1.mp4', 1);
-INSERT INTO video (video_id, video_url, video_spectacle_id) VALUES (2, 'video_2.mp4', 2);
