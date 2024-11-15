@@ -1,4 +1,5 @@
 <section id="soiree-details">
+    <a href="?action=default">Retour à l'accueil</a>
     <?php if (isset($soiree) && is_array($soiree) && !empty($soiree)): ?>
         <h1><?= htmlspecialchars($soiree['soiree_nom']) ?></h1>
         <div class="soiree-main-info">

@@ -1,5 +1,5 @@
-<a href="?action=default">Retour à l'accueil</a>
 <form method="post" action="?action=register" class="form form-action">
+    <a href="?action=default">Retour à l'accueil</a>
     <div class="inputs">
         <div class="input-parent">
             <label for="utilisateur_nom">Nom d'utilisateur</label>

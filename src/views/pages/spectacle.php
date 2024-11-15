@@ -1,4 +1,5 @@
 <section id="spectacle-details">
+    <a href="?action=default">Retour à l'accueil</a>
     <?php if (isset($spectacle) && is_array($spectacle) && !empty($spectacle)): ?>
 
             <h1><?= htmlspecialchars($spectacle['spectacle_titre']) ?></h1>
